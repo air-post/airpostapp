@@ -9,8 +9,8 @@ class CreatePosts < ActiveRecord::Migration[5.0]
     	t.decimal :accuracy
     	t.decimal :altitude_accuracy
     	t.datetime :deleted_at
-    	t.datetime :expire_at
-    	t.datetime :expired
+    	t.datetime :expire_time
+    	t.boolean :expired
     	t.integer :deleted_by
 
     	t.timestamps

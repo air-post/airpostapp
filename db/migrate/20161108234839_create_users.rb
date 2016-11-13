@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     execute <<-SQL
       INSERT into users
         (name, email, password, disabled_at, created_at, updated_at)
-        values ("system", "system@airpost.com", "111111", null, datetime(), datetime());
+        VALUES ('system', 'system@airpost.com', '111111', null, NOW(), NOW());
     SQL
   end
 

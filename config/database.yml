@@ -10,8 +10,22 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2 
+  encoding: utf8
+  pool: 5
+
+  host: mysql.airpost.dreamhosters.com
+  port: 3306
+  database: airpost_dev
+  username: airpost
+  password: Pa55w0rd
+  # adapter: postgresql
+  # encoding: unicode
+  # username: postgres
+  # password: postgres
+  # host: localhost
+  # port: 5432
+  # database: airpost_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,6 +39,7 @@ test:
   port: 3306
   database: airpost_dev
   username: airpost
+  password: Pa55w0rd
 
 production:
   <<: *default

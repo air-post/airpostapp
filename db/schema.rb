@@ -12,27 +12,27 @@
 
 ActiveRecord::Schema.define(version: 20161109011735) do
 
-  create_table "posts", force: :cascade do |t|
-    t.string   "title",                                      null: false
-    t.text     "content",                                    null: false
-    t.decimal  "latitude",          precision: 10, scale: 6, null: false
-    t.decimal  "longitude",         precision: 10, scale: 6, null: false
-    t.decimal  "altitude",          precision: 10, scale: 6
-    t.decimal  "accuracy"
-    t.decimal  "altitude_accuracy"
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",                                                    null: false
+    t.text     "content",           limit: 65535,                          null: false
+    t.decimal  "latitude",                        precision: 13, scale: 9, null: false
+    t.decimal  "longitude",                       precision: 13, scale: 9, null: false
+    t.decimal  "altitude",                        precision: 13, scale: 9
+    t.decimal  "accuracy",                        precision: 10
+    t.decimal  "altitude_accuracy",               precision: 10
     t.datetime "deleted_at"
     t.datetime "expire_time"
     t.boolean  "expired"
     t.integer  "deleted_by"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.integer  "user_id"
-    t.index ["latitude"], name: "index_posts_on_latitude"
-    t.index ["longitude"], name: "index_posts_on_longitude"
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["latitude"], name: "index_posts_on_latitude", using: :btree
+    t.index ["longitude"], name: "index_posts_on_longitude", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",        null: false
     t.string   "email",       null: false
     t.string   "password",    null: false
@@ -41,4 +41,5 @@ ActiveRecord::Schema.define(version: 20161109011735) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "posts", "users"
 end

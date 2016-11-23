@@ -52,3 +52,4 @@ gem 'pg'
 gem 'mysql2'
 
 gem 'rack-attack'
+gem 'rack-cors'

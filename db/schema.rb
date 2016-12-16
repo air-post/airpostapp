@@ -10,35 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109011735) do
+ActiveRecord::Schema.define(version: 20161216103930) do
 
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title",                                                    null: false
-    t.text     "content",           limit: 65535,                          null: false
-    t.decimal  "latitude",                        precision: 13, scale: 9, null: false
-    t.decimal  "longitude",                       precision: 13, scale: 9, null: false
-    t.decimal  "altitude",                        precision: 13, scale: 9
-    t.decimal  "accuracy",                        precision: 10
-    t.decimal  "altitude_accuracy",               precision: 10
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title",                                      null: false
+    t.text     "content",                                    null: false
+    t.decimal  "latitude",          precision: 13, scale: 9, null: false
+    t.decimal  "longitude",         precision: 13, scale: 9, null: false
+    t.decimal  "altitude",          precision: 13, scale: 9
+    t.decimal  "accuracy"
+    t.decimal  "altitude_accuracy"
     t.datetime "deleted_at"
     t.datetime "expire_time"
     t.boolean  "expired"
     t.integer  "deleted_by"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "user_id"
     t.index ["latitude"], name: "index_posts_on_latitude", using: :btree
     t.index ["longitude"], name: "index_posts_on_longitude", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",        null: false
-    t.string   "email",       null: false
-    t.string   "password",    null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "user_name",       null: false
+    t.string   "email",           null: false
+    t.string   "password_digest", null: false
     t.datetime "disabled_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_type"
+    t.string   "token"
+    t.index ["token"], name: "index_users_on_token", unique: true, using: :btree
   end
 
   add_foreign_key "posts", "users"

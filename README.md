@@ -93,9 +93,9 @@
  
  	password: user password to create or login. 
  
- 	password_confirmation: confirmation password, only used when force_create is true
- 
- 	optional user_type: only accept device/facebook/google 
+ 	password_confirmation: confirmation password, only used when force_create is true, optional 
+ 	
+ 	user_type: only accept device/facebook/google 
  
  	force_create: true if want to create user when not find the user in database, optional
  

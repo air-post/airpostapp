@@ -10,15 +10,15 @@ default: &default
   timeout: 5000
 
 development:
-  adapter: mysql2 
+  adapter: postgresql 
   encoding: utf8
   pool: 5
 
-  host: mysql.airpost.dreamhosters.com
-  port: 3306
+  host: localhost
+  port: 5432
   database: airpost_dev
-  username: airpost
-  password: Pa55w0rd
+  username: postgres
+  password: postgres
   # adapter: postgresql
   # encoding: unicode
   # username: postgres

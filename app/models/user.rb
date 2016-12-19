@@ -12,7 +12,7 @@ class User < ApplicationRecord
 	default_scope { where(disabled_at: nil)} 
 	scope :of_id, -> (id) { where(id: id) }
 	scope :of_name, -> (user_name) { where(user_name: user_name) }
-	scope :of_type, -> (user_type) { where(user_name: user_type) }
+	scope :of_type, -> (user_type) { where(user_type: user_type) }
 
 	has_many :posts
 

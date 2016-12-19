@@ -13,6 +13,8 @@ module Api
 
 		def create
 			user = User.new(user_params)
+			user.password = params[:password]
+			user.password_confirmation = params[:password_confirmation]
 			user.save!
 			render json: user
 		end
@@ -21,9 +23,11 @@ module Api
 			user = User.of_name(params[:user_name]).of_type(params[:user_type]).first
 			if user.nil? && params[:force_create] == 'true'
 				user = User.new(user_params)
+				user.password = params[:password]
+				user.password_confirmation = params[:password_confirmation]
 				user.save!
 			else
-				user = {} unless user.authenticate(params[:password])
+				user = {} unless user.present? && user.authenticate(params[:password])
 			end
 			render json: user
 		end
@@ -37,7 +41,7 @@ module Api
 		private
 
 		def user_params
-	    	params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :user_type)
+	    	params.require(:user).permit(:user_name, :email, :user_type)
 	  end
 	end
 end
